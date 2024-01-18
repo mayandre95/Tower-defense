@@ -1,0 +1,316 @@
+
+// public class SpriteManager {
+// private public SpriteManager() {
+
+// }
+
+// private BufferedImage getTilesImage() {
+// BufferedImage tilesImage = null;
+
+// String spritePath =
+// "/home/axelradin/PreMsc/repository/java_repository/T-JAV-501-PAR_28/GameWindow/ressources/TilesImages.png";
+
+// BufferedImage spriteImage = null;
+// File file = new File(spritePath);
+// try {
+// tilesImage = ImageIO.read(file);
+
+// } catch (IOException e) {
+// e.printStackTrace();
+// }
+
+// if (spriteImage == null) {
+// System.out.println("The Tile Image did not load");
+// }
+
+// return tilesImage;
+// }
+
+// private BufferedImage getEnemiesAndTowerImage() {
+// BufferedImage enemiesImages = null;
+// String spritePath =
+// "/home/axelradin/PreMsc/repository/java_repository/T-JAV-501-PAR_28/GameWindow/ressources/EnemiesImages.png";
+// File file = new File(spritePath);
+// try {
+// enemiesImages = ImageIO.read(file);
+
+// } catch (IOException e) {
+// e.printStackTrace();
+// }
+
+// if (enemiesImages == null) {
+// System.out.println("The Tile Image did not load");
+// }
+
+// }
+
+// private <T extend>void Image(T type) {
+// if()
+// BufferedImage[] gobelin = new BufferedImage[9];
+// BufferedImage enemies = getEnemiesAndTowerImage();
+// for (int x = 0; x < 9; x++) {
+// gobelin[x] = enemies.getSubimage(x * 64, 0, 64, 64);
+// }
+// }
+
+// }
+//////////////////////////////////////////////////////////////////////////////////////////
+
+private BufferedImage[] createOverlayImage(BufferedImage[] img1, BufferedImage img2, double rotation) {
+        BufferedImage[] overlayImgFrame = new BufferedImage[img1.length];
+        for (BufferedImage i : img1) {
+            int x = 0;
+            BufferedImage overlayImg = new BufferedImage(i.getWidth(), i.getHeight(), i.getType());
+            Graphics2D g2d = overlayImg.createGraphics();
+            g2d.drawImage(i, 0, 0, null);
+            g2d.rotate(Math.toRadians(rotation), i.getWidth() / 2.0, i.getHeight() / 2.0);
+            g2d.drawImage(img2, 0, 0, null);
+            g2d.dispose();
+            overlayImgFrame[x] = overlayImg;
+            x++;
+
+        }
+        return overlayImgFrame;
+//////////////////////////////////////////////////////////////////////////////////////////
+
+         // @Override
+        // protected void paintComponent(Graphics g) {
+        // super.paintComponent(g);
+        // // Dessiner l'image à partir de l'ImageIcon
+        // g.drawImage(towerSpriteManager.getSpriteImage()[0], 0, 0, this);
+        // g.drawImage(enemySpriteManager.getSpriteImage()[0], 0, 64 * 1, this);
+        // g.drawImage(tileSpriteManager.getSpriteImage()[0], 64 * 1, 64 * 2, this);
+        // roadCorner.rotatingImg();
+        // BufferedImage[] roadImage = roadCorner.getSpritImages();
+        // if (roadImage != null && roadImage.length > 0) {
+        // g.drawImage(roadImage[0], 64 * 0, 64 * 3, this);
+        // } else {
+        // System.out.println("Pas d'image dans roadcorner getSpritImg");
+        // }
+
+        // BufferedImage[] roadImgM = roadMiddle.getSpritImages();
+        // if (roadImgM != null && roadImgM.length > 0) {
+        // g.drawImage(roadImgM[0], 64 * 0, 64 * 4, this);
+        // } else {
+        // System.out.println("Pas d'image dans roadcorner getSpritImg");
+        // }
+        // roadMiddle.rotatingImg();
+        // BufferedImage[] roadImg2 = roadMiddle.getSpritImages();
+        // if (roadImg2 != null && roadImg2.length > 0) {
+        // g.drawImage(roadImg2[0], 64 * 0, 64 * 5, this);
+        // } else {
+        // System.out.println("Pas d'image dans roadcorner getSpritImg");
+        // }
+        // // g.drawImage(roadCorner.getSpritImages()[0], 64 * 1, 64 * 2, this);
+        // // g.drawString("" + roadCorner.getRotation(), 64 * 2, 64 * 3);
+        // // g.drawImage(roadCorner.getSpritImages()[0], 64 * 2, 64 * 5, this);
+        // }
+        // }
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// private Image getEnemiesImage() {
+    // File file = new File(
+    // "/home/axelradin/PreMsc/repository/java_repository/T-JAV-501-PAR_28/GameWindow/ressources/EnemiesImages.png");
+    // BufferedImage enemiesImage = null;
+    // try {
+    // enemiesImage = ImageIO.read(file);
+    // } catch (IOException e) {
+    // e.printStackTrace();
+    // }
+    // if (enemiesImage == null) {
+    // System.out.println("The Enemies Image did not load");
+    // }
+
+    // return enemiesImage;
+    // }
+
+ // switch (dir) {
+        //     case LEFT:
+        //         this.x -= speed;
+        //         break;
+        //     case UP:
+        //         this.y -= speed;
+        //         break;
+        //     case RIGHT:
+        //         this.x += speed;
+        //         break;
+        //     case DOWN:
+        //         this.y += speed;
+        //         break;
+        // }
+
+        // public <T extends AWindow> void setNewCurrentFrame(Class<T> windowClass) {
+    // try {
+    // T newFrame =
+    // windowClass.getDeclaredConstructor(GameWindow.class).newInstance(this);
+    // currentFrame = newFrame;
+    // LauncherWindow(currentFrame);
+    // } catch (Exception e) {
+    // e.printStackTrace();
+    // }
+    // }
+
+
+     public static class ImagePanel extends JPanel {
+        BufferedImage towerSprite;
+        BufferedImage enemySprite;
+        SpriteManager<ATower> towerSpriteManager;
+        SpriteManager<AEnemy> enemySpriteManager;
+        SpriteManager<Tiles> tileSpriteManager;
+        SpriteManager<Tiles> tileSpriteManager2;
+        ROAD_CORNER roadCorner = new ROAD_CORNER();
+        ROAD_MIDDLE roadMiddle = new ROAD_MIDDLE();
+
+        public ImagePanel() {
+            towerSpriteManager = new SpriteManager<>(new Archer());
+
+            enemySpriteManager = new SpriteManager<>(new Dragon());
+
+            tileSpriteManager = new SpriteManager<>(new ROAD_CORNER());
+
+        }
+
+        public static void main(String[] args) {
+            ImagePanel panel = new ImagePanel();
+            JFrame frame = new JFrame("Test tour image");
+            frame.add(panel);
+            frame.setSize(800, 800);
+            frame.setResizable(false);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setVisible(true);
+            // Add additional testing or assertions as needed
+        }
+
+
+         // }
+        // if (!ObstacleManager(newX, newY) && !isCastle()) {
+        // xCoord += speed;
+        // return;
+        // }
+
+        // newY = (int) (yCoord + speed + 64);
+
+        // if (!ObstacleManager(newX, newY) && !isCastle()) {
+        // yCoord += speed;
+        // return;
+        // }
+
+        // newY = (int) (yCoord - speed + 64);
+        // if (!ObstacleManager(newX, newY) && !isCastle()) {
+        // yCoord -= speed;
+        // return;
+        // }
+
+        // if (isCastle()) {
+        // ///
+        // }
+
+
+        
+        if (this.dir.equals("NULL")) {
+            xCoord += speed;
+            dir = "RIGHT";
+            return;
+        }
+
+        switch (dir) {
+
+            case "LEFT":
+                newX = (int) (newX - speed);
+                if (!ObstacleManager((int) newX, (int) newY) && !isCastle()) {
+                    this.xCoord -= speed;
+                    dir = "LEFT";
+                } else {
+                    dir = "RIGHT";
+                }
+                break;
+
+            case "RIGHT":
+                newX += 64;
+                if (!ObstacleManager((int) newX, (int) newY) && !isCastle()) {
+                    this.xCoord += speed;
+                    dir = "RIGHT";
+                } else {
+                    dir = "UP";
+                }
+                break;
+            case "UP":
+                newY = (int) (newY - speed);
+                if (!ObstacleManager((int) newX, (int) newY) && !isCastle()) {
+                    this.yCoord -= speed;
+                    dir = "UP";
+                } else {
+                    dir = "DOWN";
+                }
+                break;
+            case "DOWN":
+                newY += 64;
+                if (!ObstacleManager((int) newX, (int) newY) && !isCastle()) {
+                    this.yCoord += speed;
+                    dir = "DOWN";
+                } else {
+                    dir = "LEFT";
+                }
+                break;
+        }
+
+
+
+        /////////////////////////////////////////////////////////////////////////////////////
+        
+        
+ public void updatePosition() {
+
+        float newX = (int) (xCoord);
+        float newY = (int) (yCoord);
+
+        System.out.println("Current dir: " + dir);
+        System.out.println("Current position: (" + newX + ", " + newY + ")");
+
+    }
+
+    private boolean ObstacleManager(int newX, int newY) {
+        int xMap = newX / 64;
+        int yMap = newY / 64;
+
+        System.out.println("The x of the new position is " + newX);
+        System.out.println("The y of the new position is " + newY);
+
+        int nextXMap = xMap;
+        int nextYMap = yMap;
+
+        switch (dir) {
+            case "LEFT":
+                nextXMap--;
+                break;
+            case "RIGHT":
+                nextXMap++;
+                break;
+            case "UP":
+                nextYMap--;
+                break;
+            case "DOWN":
+                nextYMap++;
+                break;
+        }
+
+        if (play.map.getIndexEnd() == play.map.getMatrice()[nextXMap][nextYMap]) {
+            setCastle(true);
+            return false;
+        } else if (play.map.getIndexRoad().contains(play.map.getMatrice()[nextXMap][nextYMap])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //////////////////////////////////////////////////
+      // for (int x = 0; x < tileList.size(); x++) {
+        // for (int y = 0; y < tileList.get(x).length; y++) {
+        // BufferedImage img = tileList.get(x)[y];
+        // System.out.println("Tile at (" + x + ", " + y + "): " + img);
+        // G.drawImage(img, x * tileSize, y * tileSize, null);
+        // }
+        // }

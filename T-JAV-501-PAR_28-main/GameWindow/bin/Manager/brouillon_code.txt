@@ -1,0 +1,15 @@
+private BufferedImage[] createOverlayImage(BufferedImage[] img1, BufferedImage img2, double rotation) {
+        BufferedImage[] overlayImgFrame = new BufferedImage[img1.length];
+        for (BufferedImage i : img1) {
+            int x = 0;
+            BufferedImage overlayImg = new BufferedImage(i.getWidth(), i.getHeight(), i.getType());
+            Graphics2D g2d = overlayImg.createGraphics();
+            g2d.drawImage(i, 0, 0, null);
+            g2d.rotate(Math.toRadians(rotation), i.getWidth() / 2.0, i.getHeight() / 2.0);
+            g2d.drawImage(img2, 0, 0, null);
+            g2d.dispose();
+            overlayImgFrame[x] = overlayImg;
+            x++;
+
+        }
+        return overlayImgFrame;
